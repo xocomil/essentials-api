@@ -1,14 +1,19 @@
-import { Component } from "@angular/core";
-import { RouterModule } from "@angular/router";
-import { NxWelcomeComponent } from "./nx-welcome.component";
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { EpisodesService } from '@rick/api';
+import { async } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
-  selector: "essentials-api-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  imports: [RouterModule, AsyncPipe, JsonPipe],
+  selector: 'essentials-api-rick',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = "rick";
+  readonly #episodesService = inject(EpisodesService);
+
+  protected episodes = this.#episodesService.getAllEpisodes();
+  protected readonly async = async;
 }
