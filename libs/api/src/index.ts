@@ -1,2 +1,3 @@
-export { provideApiBase, API_BASE_TOKEN } from './lib/api.di';
-export { EpisodesService } from './lib/episodes.service';
+export * from './lib/api.di';
+export * from './lib/episodes.service';
+export * from './lib/models/episode';
