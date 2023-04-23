@@ -4,6 +4,7 @@
   "affected": {
     "defaultBase": "master"
   },
+  "defaultProject": "rick",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",

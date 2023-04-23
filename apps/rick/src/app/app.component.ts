@@ -1,8 +1,6 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { EpisodesService } from '@rick/api';
-import { async } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -11,9 +9,4 @@ import { async } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  readonly #episodesService = inject(EpisodesService);
-
-  protected episodes = this.#episodesService.getAllEpisodes();
-  protected readonly async = async;
-}
+export class AppComponent {}
