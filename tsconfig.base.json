@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@rick/api": ["libs/api/src/index.ts"]
+      "@rick/api": ["libs/api/src/index.ts"],
+      "@rick/episodes": ["libs/episodes/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
