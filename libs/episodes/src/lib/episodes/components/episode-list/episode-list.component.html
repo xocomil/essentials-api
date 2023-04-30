@@ -1,1 +1,7 @@
-<p>episode-list works!</p>
+<button mat-button type="button" color="primary">Test</button>
+<div class="list">
+  <essentials-api-episode-tile
+    *ngFor="let episode of episodes$ | async"
+    [episode]="episode"
+  />
+</div>
