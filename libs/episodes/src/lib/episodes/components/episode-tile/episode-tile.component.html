@@ -1,8 +1,13 @@
 <mat-card>
+  <mat-card-header>
+    <mat-card-title class="ellipsis">
+      {{ episode.name }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      <strong>{{ episode.episode }}:</strong> {{ episode.air_date }}
+    </mat-card-subtitle>
+  </mat-card-header>
   <mat-card-content>
-    <strong>Name:</strong> {{ episode.name }} <br />
-    <strong>Air Date:</strong> {{ episode.air_date }} <br />
-    <strong>Episode:</strong> {{ episode.episode }} <br />
     <strong>Number of characters:</strong> {{ episode.characters.length }}
     <br />
     <strong>Url:</strong> {{ episode.url }}
