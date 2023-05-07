@@ -8,15 +8,25 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/rick",
         "index": "apps/rick/src/index.html",
         "main": "apps/rick/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/rick/tsconfig.app.json",
-        "assets": ["apps/rick/src/favicon.ico", "apps/rick/src/assets"],
-        "styles": ["apps/rick/src/styles.scss"],
+        "assets": [
+          "apps/rick/src/favicon.ico",
+          "apps/rick/src/assets"
+        ],
+        "styles": [
+          "@angular/material/prebuilt-themes/deeppurple-amber.css",
+          "apps/rick/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -65,15 +75,22 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/rick/**/*.ts", "apps/rick/**/*.html"]
+        "lintFilePatterns": [
+          "apps/rick/**/*.ts",
+          "apps/rick/**/*.html"
+        ]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/rick/jest.config.ts",
         "passWithNoTests": true
@@ -86,7 +103,7 @@
       }
     },
     "serve-static": {
-      "executor": "@nrwl/web:file-server",
+      "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "rick:build"
       }

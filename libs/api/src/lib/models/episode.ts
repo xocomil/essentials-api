@@ -10,6 +10,21 @@
  * created  string  Time at which the episode was created in the database.
  */
 
+/*
+{
+    "count": 51,
+    "pages": 3,
+    "next": "https://rickandmortyapi.com/api/episode?page=2",
+    "prev": null
+}
+ */
+export type EpisodeInfo = {
+  count: number;
+  pages: number;
+  next: string | null;
+  prev: string | null;
+};
+
 export type Episode = {
   id: number;
   name: string;
@@ -19,3 +34,18 @@ export type Episode = {
   url: string[];
   created: string;
 };
+
+export type EpisodeResponse = {
+  info: EpisodeInfo;
+  results: Episode[];
+};
+
+export const emptyEpisode = () => ({
+  id: -1,
+  name: 'Empty Episode',
+  air_date: 'never',
+  episode: 'unaired',
+  characters: [],
+  url: [],
+  created: 'never',
+});

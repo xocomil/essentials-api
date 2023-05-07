@@ -1,0 +1,18 @@
+:host {
+  --top-bottom-margin: 1.5rem;
+  --combined-height: calc(var(--top-bottom-margin) * 2);
+
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  margin: var(--top-bottom-margin) auto;
+  height: calc(100% - var(--combined-height));
+  overflow: hidden;
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  padding: 0.25rem;
+  overflow: auto;
+}

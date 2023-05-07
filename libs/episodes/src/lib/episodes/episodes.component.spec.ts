@@ -1,21 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { createComponentFactory, mockProvider } from '@ngneat/spectator/jest';
 import { EpisodesComponent } from './episodes.component';
+import { EpisodesStore } from './store/episodes.store';
+
+const episodesStoreStub = (): Partial<EpisodesStore> => ({
+  getInitialEpisodes: jest.fn(),
+});
+
+const createComponent = createComponentFactory({
+  component: EpisodesComponent,
+  componentProviders: [mockProvider(EpisodesStore, episodesStoreStub())],
+});
 
 describe('EpisodesComponent', () => {
-  let component: EpisodesComponent;
-  let fixture: ComponentFixture<EpisodesComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [EpisodesComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(EpisodesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const spectator = createComponent();
+
+    expect(spectator).toBeTruthy();
   });
 });
