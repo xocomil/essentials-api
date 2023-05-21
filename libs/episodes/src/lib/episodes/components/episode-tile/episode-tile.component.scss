@@ -1,3 +1,17 @@
 :host {
+  --max-card-width: 366px;
+  --mat-card-title-text-size: 1.3rem;
+
   display: block;
+  width: var(--max-card-width);
+}
+
+mat-card-header {
+  display: flow-root;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
