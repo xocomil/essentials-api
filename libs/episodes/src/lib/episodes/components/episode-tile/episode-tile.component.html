@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card (click)="cardClicked()">
   <mat-card-header>
     <mat-card-title class="ellipsis">
       {{ episode.name }}
@@ -9,7 +9,5 @@
   </mat-card-header>
   <mat-card-content>
     <strong>Number of characters:</strong> {{ episode.characters.length }}
-    <br />
-    <strong>Url:</strong> {{ episode.url }}
   </mat-card-content>
 </mat-card>

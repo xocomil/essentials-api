@@ -7,6 +7,11 @@ export const episodeRoutes: Routes = [
       import('./episodes/episodes.component').then((c) => c.EpisodesComponent),
   },
   {
+    path: ':id',
+    loadComponent: () =>
+      import('./episode/episode.component').then((c) => c.EpisodeComponent),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

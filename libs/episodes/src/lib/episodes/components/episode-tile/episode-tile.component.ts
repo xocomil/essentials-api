@@ -1,8 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  NgZone,
+  inject,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { emptyEpisode, Episode } from '@rick/api';
+import { Router } from '@angular/router';
+import { Episode, emptyEpisode } from '@rick/api';
 
 @Component({
   selector: 'essentials-api-episode-tile',
@@ -13,5 +20,14 @@ import { emptyEpisode, Episode } from '@rick/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EpisodeTileComponent {
+  readonly #router = inject(Router);
+  readonly #ngZone = inject(NgZone);
+
   @Input() episode: Episode = emptyEpisode();
+
+  protected cardClicked() {
+    this.#ngZone.run(() => {
+      this.#router.navigate(['/episodes', this.episode.id]);
+    });
+  }
 }
