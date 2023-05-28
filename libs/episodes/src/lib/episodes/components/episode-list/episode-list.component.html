@@ -1,7 +1,6 @@
-<div class="header"><h1>Episodes</h1></div>
 <div class="list">
   <essentials-api-episode-tile
-    *ngFor="let episode of episodes$ | push"
+    *ngFor="let episode of episodes()"
     [episode]="episode"
   />
 </div>
