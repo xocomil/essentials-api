@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { EpisodesPagerComponent } from './components/EpisodesPager/episodes-pager.component';
 import { EpisodeListComponent } from './components/episode-list/episode-list.component';
 import { EpisodesStore } from './store/episodes.store';
 
 @Component({
   selector: 'essentials-api-episodes',
   standalone: true,
-  imports: [CommonModule, EpisodeListComponent],
+  imports: [CommonModule, EpisodeListComponent, EpisodesPagerComponent],
   templateUrl: './episodes.component.html',
   styleUrls: ['./episodes.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

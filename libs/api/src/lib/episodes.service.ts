@@ -15,6 +15,10 @@ export class EpisodesService {
   getAllEpisodes(): Observable<EpisodeResponse> {
     const endpoint = Location.joinWithSlash(this.#apiBase, 'episode');
 
+    return this.getEpisodes(endpoint);
+  }
+
+  getEpisodes(endpoint: string): Observable<EpisodeResponse> {
     return this.#httpClient.get<EpisodeResponse>(endpoint);
   }
 }

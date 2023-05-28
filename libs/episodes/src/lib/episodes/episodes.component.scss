@@ -1,5 +1,46 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+// Get the color config from the theme.
+$primary-palette: mat.get-color-config(mat.$deep-purple-palette);
+
+// Get the primary color palette from the color-config.
+$primary-dark: mat.get-color-from-palette($primary-palette, 900);
+$primary-dark-inverse: map.get(
+  mat.get-color-from-palette($primary-palette, 'contrast'),
+  900
+);
+
 :host {
   height: 100%;
   max-height: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.header {
+  flex: none;
+  border-radius: 0.25rem;
+  background-color: $primary-dark;
+  color: $primary-dark-inverse;
+  padding: 1rem;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 0.5rem;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.content {
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 0.1rem;
+}
+
+.footer {
+  flex: none;
 }

@@ -1,9 +1,29 @@
+@use '@angular/material' as mat;
+
+// Get the color config from the theme.
+$primary-palette: mat.get-color-config(mat.$deep-purple-palette);
+
+// Get the primary color palette from the color-config.
+$hover-background: mat.get-color-from-palette($primary-palette, 50);
+$hover-color: mat.get-color-from-palette($primary-palette, 700);
+
 :host {
   --max-card-width: 366px;
   --mat-card-title-text-size: 1.3rem;
+  --mat-card-hover-background: #{$hover-background};
+  --mat-card-hover-color: #{$hover-color};
 
   display: block;
   width: var(--max-card-width);
+
+  mat-card {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--mat-card-hover-background, aliceblue);
+      color: var(--mat-card-hover-color);
+    }
+  }
 }
 
 mat-card-header {

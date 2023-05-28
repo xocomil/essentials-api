@@ -5,15 +5,15 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
-import { PushPipe } from '@rx-angular/template/push';
 import { EpisodesStore } from '../../store/episodes.store';
 import { EpisodeTileComponent } from '../episode-tile/episode-tile.component';
 
 @Component({
   selector: 'essentials-api-episode-list',
   standalone: true,
-  imports: [CommonModule, EpisodeTileComponent, MatButtonModule, PushPipe],
+  imports: [CommonModule, EpisodeTileComponent, MatButtonModule],
   templateUrl: './episode-list.component.html',
   styleUrls: ['./episode-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,7 +21,9 @@ import { EpisodeTileComponent } from '../episode-tile/episode-tile.component';
 export class EpisodeListComponent implements OnInit {
   readonly #episodeStore = inject(EpisodesStore);
 
-  protected episodes$ = this.#episodeStore.episodes$;
+  protected episodes = toSignal(this.#episodeStore.episodes$, {
+    initialValue: [],
+  });
 
   ngOnInit(): void {
     this.#episodeStore.getInitialEpisodes();
