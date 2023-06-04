@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_BASE_TOKEN } from './api.di';
-import { EpisodeResponse } from './models/episode';
+import { Episode, EpisodeResponse } from './models/episode';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +20,11 @@ export class EpisodesService {
 
   getEpisodes(endpoint: string): Observable<EpisodeResponse> {
     return this.#httpClient.get<EpisodeResponse>(endpoint);
+  }
+
+  getEpisode(id: string): Observable<Episode> {
+    return this.#httpClient.get<Episode>(
+      Location.joinWithSlash(this.#apiBase, `episode/${id}`)
+    );
   }
 }
