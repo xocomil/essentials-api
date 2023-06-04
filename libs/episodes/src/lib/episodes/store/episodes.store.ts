@@ -41,6 +41,14 @@ export class EpisodesStore extends ComponentStore<EpisodesState> {
   readonly showNext$ = this.#episodeInfo$.pipe(map(({ next }) => !!next));
   readonly showPrev$ = this.#episodeInfo$.pipe(map(({ prev }) => !!prev));
 
+  readonly numberOfEpisodes = this.selectSignal(
+    ({
+      episodesResponse: {
+        info: { count },
+      },
+    }) => count
+  );
+
   constructor() {
     super(initialState());
   }

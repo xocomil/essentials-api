@@ -1,18 +1,6 @@
-<button
-  type="button"
-  mat-flat-button
-  color="primary"
-  *ngIf="showPrev()"
-  (click)="getPrev()"
+<mat-paginator
+  [length]="numberOfEpisodes()"
+  [pageSize]="20"
+  (page)="changePage($event)"
 >
-  Previous
-</button>
-<button
-  type="button"
-  mat-flat-button
-  color="primary"
-  *ngIf="showNext()"
-  (click)="getNext()"
->
-  Next
-</button>
+</mat-paginator>

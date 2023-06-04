@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { EpisodesStore } from '../../store/episodes.store';
 
 @Component({
   selector: 'essentials-api-episodes-pager',
   standalone: true,
-  imports: [CommonModule, MatButtonModule],
+  imports: [CommonModule, MatPaginatorModule],
   templateUrl: './episodes-pager.component.html',
   styleUrls: ['./episodes-pager.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,18 +14,23 @@ import { EpisodesStore } from '../../store/episodes.store';
 export class EpisodesPagerComponent {
   readonly #episodesStore = inject(EpisodesStore);
 
-  protected readonly showNext = toSignal(this.#episodesStore.showNext$, {
-    initialValue: false,
-  });
-  protected readonly showPrev = toSignal(this.#episodesStore.showPrev$, {
-    initialValue: false,
-  });
+  protected readonly numberOfEpisodes = this.#episodesStore.numberOfEpisodes;
 
-  protected getNext() {
+  #getNext() {
     this.#episodesStore.getNextEpisodes();
   }
 
-  protected getPrev() {
+  #getPrev() {
     this.#episodesStore.getPrevEpisodes();
+  }
+
+  protected changePage(event: PageEvent) {
+    if (event.pageIndex < (event.previousPageIndex ?? 0)) {
+      this.#getPrev();
+
+      return;
+    }
+
+    this.#getNext();
   }
 }
