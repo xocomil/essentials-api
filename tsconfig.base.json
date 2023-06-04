@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@essentials-api/rxjs-operators": ["libs/rxjs-operators/src/index.ts"],
       "@rick/api": ["libs/api/src/index.ts"],
       "@rick/episodes": ["libs/episodes/src/index.ts"]
     }
