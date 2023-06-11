@@ -1,2 +1,15 @@
-<a routerLink="/episodes">All Episodes</a>
-<p>episode works! {{ id }}</p>
+<essentials-api-header class="header"
+  ><h1>{{ episodeStore.name() }}</h1>
+  <div class="return-home"><a routerLink="/episodes">All Episodes</a></div>
+</essentials-api-header>
+<div class="sub-header">
+  <div class="episode">
+    <strong>Episode:</strong> <i>{{ episodeStore.episode() }}</i>
+  </div>
+  <div class="air-date">
+    <strong>Air Date:</strong> <i>{{ episodeStore.airDate() }}</i>
+  </div>
+</div>
+<div class="characters-list">
+  <pre>{{ episodeStore.characters() | json }}</pre>
+</div>
