@@ -1,0 +1,37 @@
+:host {
+  display: contents;
+}
+
+mat-card {
+  width: calc(33% - var(--character-gap, 0));
+}
+
+@media screen and (max-width: 788px) {
+  mat-card {
+    width: calc(50% - var(--character-gap, 0));
+  }
+}
+
+@media screen and (max-width: 622px) {
+  mat-card {
+    width: 100%;
+  }
+}
+
+.avatar {
+  background-image: var(--avatar-image);
+  background-size: cover;
+}
+
+.status-icon {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+}
+
+.episode-content {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}

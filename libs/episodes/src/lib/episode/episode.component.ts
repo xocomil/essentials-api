@@ -11,13 +11,16 @@ import {
 import { toObservable } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { logObservable } from '@essentials-api/rxjs-operators';
+import { CharacterComponent } from '../character/character.component';
 import { HeaderComponent } from '../header/header.component';
 import { EpisodeStore } from './store/episode.store';
+
+// TODO: add spinners
 
 @Component({
   selector: 'essentials-api-episode',
   standalone: true,
-  imports: [CommonModule, RouterLink, HeaderComponent],
+  imports: [CommonModule, RouterLink, HeaderComponent, CharacterComponent],
   providers: [EpisodeStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './episode.component.html',

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { API_BASE_TOKEN } from './api.di';
+import { Character } from './models/character';
 import { Episode, EpisodeResponse } from './models/episode';
 
 @Injectable({
@@ -28,12 +29,12 @@ export class EpisodesService {
     );
   }
 
-  getCharacters(ids: string[]): Observable<string> {
+  getCharacters(ids: string[]): Observable<Character[]> {
     if (ids.length === 0) {
-      return of('');
+      return of([]);
     }
 
-    return this.#httpClient.get<string>(
+    return this.#httpClient.get<Character[]>(
       Location.joinWithSlash(this.#apiBase, `character/[${ids.join(',')}]`)
     );
   }
