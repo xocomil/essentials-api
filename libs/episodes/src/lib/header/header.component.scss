@@ -1,0 +1,31 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+// Get the color config from the theme.
+$primary-palette: mat.get-color-config(mat.$deep-purple-palette);
+
+// Get the primary color palette from the color-config.
+$primary-dark: mat.get-color-from-palette($primary-palette, 900);
+$primary-dark-inverse: map.get(
+  mat.get-color-from-palette($primary-palette, 'contrast'),
+  900
+);
+$text-primary: mat.get-color-from-palette($primary-palette, 500);
+
+:host {
+  display: block;
+  --header-text-inverse: $primary-dark-inverse;
+  --header-text-primary: $text-primary;
+
+  border-radius: var(--header-border-radius, 0.25rem);
+  background-color: $primary-dark;
+  color: $primary-dark-inverse;
+  padding: var(--header-padding, 1rem);
+  text-align: var(--header-text-align, center);
+  vertical-align: var(--header-vertical-align, middle);
+  margin-bottom: var(--header-margin-botton, 0.5rem);
+}
+
+a {
+  color: $primary-dark-inverse;
+}
