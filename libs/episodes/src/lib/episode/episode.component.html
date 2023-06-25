@@ -11,5 +11,8 @@
   </div>
 </div>
 <div class="characters-list">
-  <pre>{{ episodeStore.characters() | json }}</pre>
+  <essentials-api-character
+    *ngFor="let character of episodeStore.characters()"
+    [character]="character"
+  />
 </div>

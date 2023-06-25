@@ -9,6 +9,7 @@ $text-primary: mat.get-color-from-palette($primary-palette, 700);
 
 :host {
   display: block;
+  --character-gap: 0.5rem;
 }
 
 .header {
@@ -53,4 +54,14 @@ $text-primary: mat.get-color-from-palette($primary-palette, 700);
   .air-date {
     text-align: end;
   }
+}
+
+.characters-list {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: var(--character-gap);
+  flex-wrap: wrap;
 }

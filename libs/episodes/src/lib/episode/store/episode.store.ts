@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ComponentStore } from '@ngrx/component-store';
 import { emptyEpisode, Episode, EpisodesService } from '@rick/api';
-import { mergeMap, Observable, switchMap, tap } from 'rxjs';
+import { exhaustMap, Observable, switchMap, tap } from 'rxjs';
 
 type EpisodeState = Episode;
 
@@ -20,9 +20,9 @@ export class EpisodeStore extends ComponentStore<EpisodeState> {
   );
   readonly characters = toSignal(
     this.#characterIds$.pipe(
-      mergeMap((ids) => this.#episodesService.getCharacters(ids))
+      exhaustMap((ids) => this.#episodesService.getCharacters(ids))
     ),
-    { initialValue: '' }
+    { initialValue: [] }
   );
 
   constructor() {
