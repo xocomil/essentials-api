@@ -1,18 +1,23 @@
-<essentials-api-header class="header"
-  ><h1>{{ episodeStore.name() }}</h1>
-  <div class="return-home"><a routerLink="/episodes">All Episodes</a></div>
-</essentials-api-header>
-<div class="sub-header">
-  <div class="episode">
-    <strong>Episode:</strong> <i>{{ episodeStore.episode() }}</i>
+<mat-spinner *ngIf="episodeStore.loading(); else episodeTemplate" />
+
+<ng-template #episodeTemplate>
+  <essentials-api-header class="header"
+    ><h1>{{ episodeStore.name() }}</h1>
+    <div class="return-home"><a routerLink="/episodes">All Episodes</a></div>
+  </essentials-api-header>
+  <div class="sub-header">
+    <div class="episode">
+      <strong>Episode:</strong> <i>{{ episodeStore.episode() }}</i>
+    </div>
+    <div class="air-date">
+      <strong>Air Date:</strong> <i>{{ episodeStore.airDate() }}</i>
+    </div>
   </div>
-  <div class="air-date">
-    <strong>Air Date:</strong> <i>{{ episodeStore.airDate() }}</i>
+  <div class="characters-list">
+    <mat-spinner *ngIf="episodeStore.charactersLoading()" />
+    <essentials-api-character
+      *ngFor="let character of episodeStore.characters()"
+      [character]="character"
+    />
   </div>
-</div>
-<div class="characters-list">
-  <essentials-api-character
-    *ngFor="let character of episodeStore.characters()"
-    [character]="character"
-  />
-</div>
+</ng-template>

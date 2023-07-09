@@ -1,6 +1,10 @@
-<div class="list">
-  <essentials-api-episode-tile
-    *ngFor="let episode of episodes()"
-    [episode]="episode"
-  />
-</div>
+<mat-spinner *ngIf="loading(); else listTemplate" />
+
+<ng-template #listTemplate>
+  <div class="list">
+    <essentials-api-episode-tile
+      *ngFor="let episode of episodes()"
+      [episode]="episode"
+    />
+  </div>
+</ng-template>

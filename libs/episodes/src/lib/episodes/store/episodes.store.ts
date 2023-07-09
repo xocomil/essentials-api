@@ -10,9 +10,16 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs';
+import {
+  createApiLoading,
+  createApiPending,
+  createApiSuccess,
+  LoadingState,
+} from '../../models/loading-state';
 
 type EpisodesState = {
   episodesResponse: EpisodeResponse;
+  loadingState: LoadingState;
 };
 
 const initialState = (): EpisodesState => ({
@@ -25,6 +32,7 @@ const initialState = (): EpisodesState => ({
     },
     results: [],
   },
+  loadingState: createApiPending(),
 });
 
 @Injectable()
@@ -32,21 +40,24 @@ export class EpisodesStore extends ComponentStore<EpisodesState> {
   readonly #episodeService = inject(EpisodesService);
 
   readonly episodes$ = this.select(
-    ({ episodesResponse }) => episodesResponse.results
+    ({ episodesResponse }) => episodesResponse.results,
   );
 
   readonly #episodeInfo$ = this.select(
-    ({ episodesResponse: { info } }) => info
+    ({ episodesResponse: { info } }) => info,
   );
   readonly showNext$ = this.#episodeInfo$.pipe(map(({ next }) => !!next));
   readonly showPrev$ = this.#episodeInfo$.pipe(map(({ prev }) => !!prev));
+  readonly loading = this.selectSignal(
+    ({ loadingState }) => loadingState.state === 'loading',
+  );
 
   readonly numberOfEpisodes = this.selectSignal(
     ({
       episodesResponse: {
         info: { count },
       },
-    }) => count
+    }) => count,
   );
 
   constructor() {
@@ -55,13 +66,15 @@ export class EpisodesStore extends ComponentStore<EpisodesState> {
 
   readonly getInitialEpisodes = this.effect((getEpisodes$: Observable<void>) =>
     getEpisodes$.pipe(
+      tap(() => this.patchState({ loadingState: createApiLoading() })),
       switchMap(() => this.#episodeService.getAllEpisodes()),
       tap((episodesResponse) => {
         this.patchState({
           episodesResponse,
+          loadingState: createApiSuccess(),
         });
-      })
-    )
+      }),
+    ),
   );
 
   readonly getNextEpisodes = this.effect((getEpisodes$: Observable<void>) =>
@@ -69,12 +82,13 @@ export class EpisodesStore extends ComponentStore<EpisodesState> {
       withLatestFrom(this.#episodeInfo$),
       tap(([, episodeInfo]) => {
         this.#getEpisodes(episodeInfo.next);
-      })
-    )
+      }),
+    ),
   );
 
   readonly #getEpisodes = this.effect((endpoint$: Observable<string | null>) =>
     endpoint$.pipe(
+      tap(() => this.patchState({ loadingState: createApiLoading() })),
       switchMap((endpoint) => {
         if (!endpoint) {
           return of(undefined);
@@ -86,9 +100,10 @@ export class EpisodesStore extends ComponentStore<EpisodesState> {
       tap((episodesResponse) => {
         this.patchState({
           episodesResponse,
+          loadingState: createApiSuccess(),
         });
-      })
-    )
+      }),
+    ),
   );
 
   readonly getPrevEpisodes = this.effect((getEpisodes$: Observable<void>) =>
@@ -96,7 +111,7 @@ export class EpisodesStore extends ComponentStore<EpisodesState> {
       withLatestFrom(this.#episodeInfo$),
       tap(([, episodeInfo]) => {
         this.#getEpisodes(episodeInfo.prev);
-      })
-    )
+      }),
+    ),
   );
 }
